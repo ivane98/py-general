@@ -84,7 +84,41 @@ test the samples."""
         self.testing: List[Sample] = []
         self.tuning: List[Hyperparameter] = []
 
+    def load(self, raw_data_source: Iterable[dict[str, str]]) -> None:
+        """Load and partition the raw data"""
+        for n, row in enumerate(raw_data_source):
+            sample = Sample(
+                sepal_length=float(row["sepal_length"]),
+                sepal_width=float(row["sepal_width"]),
+                petal_length=float(row["petal_length"]),
+                petal_width=float(row["petal_width"]),
+                species=row["species"],
+            )
+            if n % 5 == 0:
+                self.testing.append(sample)
+            else:
+                self.training.append(sample)
+        self.uploaded = datetime.datetime.now(tz=datetime.timezone.utc)
+
+
     
+    def test(self, parameter: Hyperparameter) -> None:
+        """Test this Hyperparameter value."""
+        parameter.test()
+        self.tuning.append(parameter)
+        self.testing = datetime.datetime.now(tz=datetime.timezone.utc)
+
+
+    def classify(self, parameter: Hyperparameter, sample: Sample) -> Sample:
+        """Test this Hyperparameter value."""
+        classification = parameter.classify(sample)
+        sample.classify(classification)
+        return sample
+    
+    
+
+    
+
 
 
 
