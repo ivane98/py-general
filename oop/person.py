@@ -13,6 +13,13 @@ class Person:
     def __str__(self):
         return f"Person: {self.name}, {self.pay}"
 
+class Manager(Person):
+    def give_raise(self, percent, bonus=.10):
+        self.pay = int(self.pay * (1 + percent + bonus))
+
+    
+        
+
 
 
 
