@@ -1,5 +1,7 @@
-import math
-print(math.pi)
-print(math.ceil(3.38))
-print(math.floor(3.38))
-print(math.sqrt(81))
+person = 'dave'
+
+coins = 3
+
+print(f"\n {person} {str(coins)} coins left")
+
+print(f"{2.25 * 10:.2f}")
