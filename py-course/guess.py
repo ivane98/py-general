@@ -42,7 +42,8 @@ def guess(name='PlayerOne'):
                 player_wins += 1
                 return f"🎉 {name}, you win!"
             else:
-                win_percent = game_count / player_wins
+
+                win_percent = (player_wins/game_count) * 100
                 return f"Sorry, {name}. better luck next time"
 
         game_result = decide_winner(player, computer)
