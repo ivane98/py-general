@@ -3,27 +3,22 @@ import random
 from enum import Enum
 
 
-def rps(name='PlayerOne'):
+def guess(name='PlayerOne'):
     game_count = 0
     player_wins = 0
-    python_wins = 0
+    win_percent = 100
 
-    def play_rps():
+    def play_guess():
         nonlocal name
         nonlocal player_wins
-        nonlocal python_wins
-
-        class RPS(Enum):
-            ROCK = 1
-            PAPER = 2
-            SCISSORS = 3
+        nonlocal win_percent
 
         playerchoice = input(
-            f"\n{name}, please enter... \n1 for Rock,\n2 for Paper, or \n3 for Scissors:\n\n")
+            f"\n{name}, guess which number i'm thinking of... 1, 2 or 3\n\n")
 
         if playerchoice not in ["1", "2", "3"]:
             print(f"{name}, please enter 1, 2, or 3.")
-            return play_rps()
+            return play_guess()
 
         player = int(playerchoice)
 
@@ -31,40 +26,32 @@ def rps(name='PlayerOne'):
 
         computer = int(computerchoice)
 
-        print(f"\n{name}, you chose {str(RPS(player)).replace('RPS.', '').title()}.")
+        print(f"\n{name}, you chose {player}.")
         print(
-            f"Python chose {str(RPS(computer)).replace('RPS.', '').title()}.\n"
+            f"I was thinking about the number {computer}\n"
         )
+
+        nonlocal game_count
+        game_count += 1
 
         def decide_winner(player, computer):
             nonlocal name
             nonlocal player_wins
-            nonlocal python_wins
-            if player == 1 and computer == 3:
+            nonlocal win_percent
+            if player == computer:
                 player_wins += 1
                 return f"🎉 {name}, you win!"
-            elif player == 2 and computer == 1:
-                player_wins += 1
-                return f"🎉 {name}, you win!"
-            elif player == 3 and computer == 2:
-                player_wins += 1
-                return f"🎉 {name}, you win!"
-            elif player == computer:
-                return "😲 Tie game!"
             else:
-                python_wins += 1
-                return f"🐍 Python wins!\nSorry, {name}..😢"
+                win_percent = game_count / player_wins
+                return f"Sorry, {name}. better luck next time"
 
         game_result = decide_winner(player, computer)
 
         print(game_result)
 
-        nonlocal game_count
-        game_count += 1
-
         print(f"\nGame count: {game_count}")
         print(f"\n{name}'s wins: {player_wins}")
-        print(f"\nPython wins: {python_wins}")
+        print(f"\nYour winning percentage: {win_percent}%")
 
         print(f"\nPlay again, {name}?")
 
@@ -76,13 +63,13 @@ def rps(name='PlayerOne'):
                 break
 
         if playagain.lower() == "y":
-            return play_rps()
+            return play_guess()
         else:
             print("\n🎉🎉🎉🎉")
             print("Thank you for playing!\n")
             sys.exit(f"Bye {name}! 👋")
 
-    return play_rps
+    return play_guess
 
 
 if __name__ == "__main__":
@@ -99,5 +86,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    rock_paper_scissors = rps(args.name)
-    rock_paper_scissors()
+    guessing_game = guess(args.name)
+    guessing_game()
