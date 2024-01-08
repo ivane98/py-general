@@ -1,3 +1,4 @@
-import os
-
-print(os.__file__)
+try:
+    print(x)
+except:
+    print('err')
