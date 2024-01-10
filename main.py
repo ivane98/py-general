@@ -1,4 +1,21 @@
+f = open('names.txt')
+
+# print(f.read(4))
+
+# print(f.readlines())
+# print(f.readline())
+
+for line in f:
+    print(line)
+
+f.close()
+
 try:
-    print(x)
+    f = open('c.txt')
+    print(f.read())
+
 except:
-    print('err')
+    print('no such file')
+
+finally:
+    f.close()
