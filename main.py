@@ -1,21 +1,6 @@
-f = open('names.txt')
+ages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24]
 
-# print(f.read(4))
-
-# print(f.readlines())
-# print(f.readline())
-
-for line in f:
-    print(line)
-
-f.close()
-
-try:
-    f = open('c.txt')
-    print(f.read())
-
-except:
-    print('no such file')
-
-finally:
-    f.close()
+ages.sort()
+ages.append(min(ages))
+ages.append(max(ages))
+print()
