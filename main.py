@@ -1,6 +1,11 @@
-ages = [19, 22, 19, 24, 20, 25, 26, 24, 25, 24]
+with open('chart.jpg', 'rb') as rf:
+    with open('chart2.jpg', 'wb') as wf:
+        chunk_size = 4096
+        rf_chunk = rf.read(chunk_size)
 
-ages.sort()
-ages.append(min(ages))
-ages.append(max(ages))
-print()
+        while len(rf_chunk) > 0:
+            wf.write(rf_chunk)
+            rf_chunk = rf.read(chunk_size)
+
+    
+    
