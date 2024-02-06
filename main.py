@@ -1,11 +1,14 @@
-with open('chart.jpg', 'rb') as rf:
-    with open('chart2.jpg', 'wb') as wf:
-        chunk_size = 4096
-        rf_chunk = rf.read(chunk_size)
+import csv
 
-        while len(rf_chunk) > 0:
-            wf.write(rf_chunk)
-            rf_chunk = rf.read(chunk_size)
+with open('names.csv', 'r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    next(csv_reader)
 
-    
-    
+    with open('new_names.csv', 'w') as new_file:
+        fieldnames = ['first_name', 'last_name']
+        csv_writer = csv.DictWriter(new_file, fieldnames=fieldnames, delimiter='\t')
+        csv_writer.writeheader()
+        
+        for l in csv_reader:
+            del l['email']
+            csv_writer.writerow(l)
