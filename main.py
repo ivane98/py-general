@@ -1,14 +1,9 @@
-import csv
+import datetime
+import pytz
 
-with open('names.csv', 'r') as csv_file:
-    csv_reader = csv.DictReader(csv_file)
-    next(csv_reader)
+dt = datetime.datetime(2016, 7, 24, 12, 30, 45, tzinfo=pytz.UTC)
+dt_now = datetime.datetime.now()
+print(dt_now)
 
-    with open('new_names.csv', 'w') as new_file:
-        fieldnames = ['first_name', 'last_name']
-        csv_writer = csv.DictWriter(new_file, fieldnames=fieldnames, delimiter='\t')
-        csv_writer.writeheader()
-        
-        for l in csv_reader:
-            del l['email']
-            csv_writer.writerow(l)
+
+
