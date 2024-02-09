@@ -1,22 +1,11 @@
-import csv
+import requests
 
-html_output = ''
-names = []
+payload = {'username': 'corey', "password": 'testing'}
 
-with open('patrons.csv', 'r') as csv_file:
-    csv_data = csv.DictReader(csv_file)
+r = requests.get('https://httpbin.org/basic-auth/corey/testing', auth=('corey', 'testing'))
 
-    next(csv_data)
+print(r)
 
-    for l in csv_data:
-        if l['FirstName'] == 'No Reward':
-            break
-        names.append(f"{l['FirstName']} {l['LastName']}")
-
-
-html_output += f"<p>There are {len(names)} contributors</p>"
-
-print(html_output)
 
 
 
