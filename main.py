@@ -1,7 +1,6 @@
-names = ['one', 'two']
-heroes = ['three', 'four']
+from getpass import getpass
 
-identities = zip(names, heroes)
+username = input('Username: ')
+password = getpasstest('Password: ')
 
-for identity in identities:
-    print(identity)
+print('Logging in...')
